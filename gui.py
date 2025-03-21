@@ -3,6 +3,9 @@
 
 
 from pathlib import Path
+from tkinter import filedialog
+from tkinter import Tk
+import textwrap
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
@@ -11,6 +14,10 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 # Define o caminho relativo para os assets
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / "assets/frame0"
+diretorio_inicial = ""
+diretorio_saida = ""
+text_diretorio_inicial = "Nenhum diretório selecionado"
+text_diretorio_saida = "Nenhum diretório selecionado"
 
 status_color = "#FFFF00"  # Define a cor para amarelo
 status = "Selecione os diretórios"  # Define o status inicial
@@ -25,7 +32,6 @@ def update_status_color():
     global status
     canvas.itemconfig(rectangle, fill=status_color)
     canvas.itemconfig(frase_status, text=status)
-
 
 # Exemplo de função para alterar a cor e status de operação
 def change_color_to_green():
@@ -49,6 +55,84 @@ def change_color_to_yellow():
     status = "Selecione os diretórios"
     update_status_color()
 
+# Funções correspondentes aos botões
+def selecionar_diretorio_inicial():
+    global diretorio_inicial
+    global status
+    global status_color
+    global text_diretorio_saida
+    """Abre um seletor de diretório para escolher o diretório inicial."""
+    root = Tk()
+    root.withdraw()  # Esconde a janela principal do tkinter
+    diretorio_inicial = filedialog.askdirectory(
+        title="Selecione o diretório inicial"
+    )
+    if not diretorio_inicial:  # Verifica se o usuário cancelou a seleção
+        diretorio_inicial = ""
+        text_diretorio_inicial = "Nenhum diretório selecionado"
+        texto_formatado = textwrap.fill(text_diretorio_inicial, width=60) # Formata o texto para quebrar a linha
+        canvas.itemconfig(label_diretorio_inicial, text=texto_formatado)
+        status = "Selecione o diretório inicial"
+        status_color = "#FFFF00"  # Define a cor para amarelo
+        update_status_color()
+        print("Seleção de diretório inicial cancelada")
+    else:
+        text_diretorio_inicial = diretorio_inicial
+        texto_formatado = textwrap.fill(text_diretorio_inicial, 60) # Formata o texto para quebrar a linha
+        canvas.itemconfig(label_diretorio_inicial, text=texto_formatado)
+        # status = "Diretório inicial selecionado"
+        update_status_color()
+        print("Botão 'Selecionar diretório inicial' pressionado")
+        if diretorio_saida:
+            change_color_to_green()
+        else:
+            status = "Selecione o diretório de saída"
+            status_color = "#FFFF00"  # Define a cor para amarelo
+            update_status_color()
+
+def selecionar_diretorio_saida():
+    global diretorio_saida
+    global status
+    global status_color
+    global text_diretorio_inicial
+    """Abre um seletor de diretório para escolher o diretório de saída."""
+    root = Tk()
+    root.withdraw()  # Esconde a janela principal do tkinter
+    diretorio_saida = filedialog.askdirectory(
+        title="Selecione o diretório de saída"
+    )
+    if not diretorio_saida:  # Verifica se o usuário cancelou a seleção
+        diretorio_saida = ""
+        text_diretorio_saida = "Nenhum diretório selecionado"
+        texto_formatado = textwrap.fill(text_diretorio_saida, 60) # Formata o texto para quebrar a linha
+        canvas.itemconfig(label_diretorio_saida, text=texto_formatado)
+        status = "Selecione o diretório de saída"
+        status_color = "#FFFF00"  # Define a cor para amarelo
+        update_status_color()
+        print("Seleção de diretório de saída cancelada")
+    else:
+        text_diretorio_saida = diretorio_saida
+        texto_formatado = textwrap.fill(text_diretorio_saida, 60) # Formata o texto para quebrar a linha
+        canvas.itemconfig(label_diretorio_saida, text=texto_formatado)
+        status = "Diretório de saída selecionado"
+        update_status_color()
+        if diretorio_inicial:
+            change_color_to_green()
+        else:
+            status = "Selecione o diretório inicial"
+            status_color = "#FFFF00"  # Define a cor para amarelo
+            update_status_color()
+
+        print("Botão 'Selecionar diretório de saída' pressionado")
+
+def porque_usar():
+    print("Botão 'Porque usar' pressionado")
+
+def qual_e_o_padrao():
+    print("Botão 'Qual é o padrão' pressionado")
+
+def executar_script():
+    print("Botão 'Executar script' pressionado")
 
 window = Tk()
 
@@ -100,11 +184,11 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("Clicado: Selecionar diretório inicial"),
-    # command= change_color_to_green(),
+    command=lambda: selecionar_diretorio_inicial(),
     relief="flat"
 )
 button_1.place(
+    # x=60.0,
     x=100.0,
     y=246.0,
     width=174.0,
@@ -117,11 +201,11 @@ button_2 = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("Clicado: Selecionar diretório de saída"),
-    # command= change_color_to_red(),
+    command=lambda: selecionar_diretorio_saida(),
     relief="flat"
 )
 button_2.place(
+    # x=60.0,
     x=100.0,
     y=323.0,
     width=184.0,
@@ -134,7 +218,7 @@ button_3 = Button(
     image=button_image_3,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("Clicado: Porque usar"),
+    command=lambda: porque_usar(),
     relief="flat"
 )
 button_3.place(
@@ -150,7 +234,7 @@ button_4 = Button(
     image=button_image_4,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("Clicado: Qual é o padrão"),
+    command=lambda: qual_e_o_padrao(),
     relief="flat"
 )
 button_4.place(
@@ -166,8 +250,7 @@ button_5 = Button(
     image=button_image_5,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("Clicado: Eecutar script"), 
-    # command= change_color_to_yellow,
+    command=lambda: executar_script(),
     relief="flat"
 )
 button_5.place(
@@ -177,26 +260,30 @@ button_5.place(
     height=52.0
 )
 
-canvas.create_text(
+label_diretorio_inicial = canvas.create_text(
     295.0,
     252.0,
+    # 51.0,
+    # 281.0,
     anchor="nw",
-    text="Nenhum diretório selecionado",
+    text=text_diretorio_inicial,
     fill="#818181",
     font=("Inter", 12 * -1)
 )
 
-canvas.create_text(
+label_diretorio_saida = canvas.create_text(
     295.0,
-    329.0,
+    329.0,    
+    # 51.0,
+    # 358.0,
     anchor="nw",
-    text="Nenhum diretório selecionado",
+    text=text_diretorio_saida,
     fill="#818181",
     font=("Inter", 12 * -1)
 )
 
 canvas.create_text(
-    60.0,
+    51.0,
     64.0,
     anchor="nw",
     text="Esta ferramenta tem o propósito de \n"
@@ -208,7 +295,7 @@ canvas.create_text(
 )
 
 canvas.create_text(
-    60.0,
+    51.0,
     157.0,
     anchor="nw",
     text="O script move as imagens contidas nas\n"
@@ -218,5 +305,5 @@ canvas.create_text(
     font=("Inter", 14 * -1)
 )
 
-window.resizable(False, False)
+window.resizable(True, True)
 window.mainloop()
