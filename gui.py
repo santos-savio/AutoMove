@@ -4,10 +4,9 @@
 
 from pathlib import Path
 from tkinter import filedialog
-from tkinter import Tk
 import textwrap
+import organizador
 
-# from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 
@@ -19,6 +18,7 @@ diretorio_saida = ""
 text_diretorio_inicial = "Nenhum diretório selecionado"
 text_diretorio_saida = "Nenhum diretório selecionado"
 
+ready = False
 status_color = "#FFFF00"  # Define a cor para amarelo
 status = "Selecione os diretórios"  # Define o status inicial
 
@@ -39,6 +39,8 @@ def change_color_to_green():
     global status
     status_color = "#00FF00"  # Define a cor para verde
     status = "Pronto para executar"
+    # Canvas.itemconfig(button_5, state="ENABLED")
+    button_5.config(state="normal")
     update_status_color()
 
 def change_color_to_red():
@@ -46,6 +48,7 @@ def change_color_to_red():
     global status
     status_color = "#FF0000"  # Define a cor para vermelho
     status = "Executando, não interromper..."
+    button_5.config(state="disabled")
     update_status_color()
 
 def change_color_to_yellow():
@@ -53,6 +56,7 @@ def change_color_to_yellow():
     global status
     status_color = "#FFFF00"  # Define a cor para amarelo
     status = "Selecione os diretórios"
+    canvas.itemconfig(button_5, state="disabled")
     update_status_color()
 
 # Funções correspondentes aos botões
@@ -80,15 +84,17 @@ def selecionar_diretorio_inicial():
         text_diretorio_inicial = diretorio_inicial
         texto_formatado = textwrap.fill(text_diretorio_inicial, 60) # Formata o texto para quebrar a linha
         canvas.itemconfig(label_diretorio_inicial, text=texto_formatado)
-        # status = "Diretório inicial selecionado"
+        status = "Diretório inicial selecionado"
         update_status_color()
-        print("Botão 'Selecionar diretório inicial' pressionado")
         if diretorio_saida:
             change_color_to_green()
         else:
             status = "Selecione o diretório de saída"
             status_color = "#FFFF00"  # Define a cor para amarelo
             update_status_color()
+
+        print("Botão 'Selecionar diretório inicial' pressionado")
+        print(f"Diretório inicial: {diretorio_inicial}")
 
 def selecionar_diretorio_saida():
     global diretorio_saida
@@ -124,6 +130,7 @@ def selecionar_diretorio_saida():
             update_status_color()
 
         print("Botão 'Selecionar diretório de saída' pressionado")
+        print(f"Diretório saída: {diretorio_saida}")
 
 def porque_usar():
     print("Botão 'Porque usar' pressionado")
@@ -132,10 +139,14 @@ def qual_e_o_padrao():
     print("Botão 'Qual é o padrão' pressionado")
 
 def executar_script():
-    print("Botão 'Executar script' pressionado")
-
+    # print("Botão 'Executar script' pressionado")
+    change_color_to_red()
+    organizador.renomear_arquivos(diretorio_inicial, diretorio_saida)
+    change_color_to_yellow()
+    
 window = Tk()
 
+window.title("savio.dev.br")
 window.geometry("700x500")
 window.configure(bg = "#FFFFFF")
 
@@ -251,7 +262,8 @@ button_5 = Button(
     borderwidth=0,
     highlightthickness=0,
     command=lambda: executar_script(),
-    relief="flat"
+    relief="flat",
+    state= "disabled"
 )
 button_5.place(
     x=245.0,
@@ -305,5 +317,5 @@ canvas.create_text(
     font=("Inter", 14 * -1)
 )
 
-window.resizable(True, True)
+window.resizable(False, False)
 window.mainloop()
