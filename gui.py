@@ -4,9 +4,11 @@
 # The script renames the images with the date of the record and moves them to a new folder
 
 from pathlib import Path
-from tkinter import filedialog
+from tkinter import filedialog, messagebox
 import textwrap
+import keyboard, os
 import organizador
+import jpg_to_pptx
 
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Button, PhotoImage
@@ -140,14 +142,59 @@ def selecionar_diretorio_saida():
 def porque_usar():
     print("Botão 'Porque usar' pressionado")
 
+    # window_porque_usar = Tk.Toplevel(window)
+    # window_porque_usar.title("Porque usar")
+    # window_porque_usar.geometry("400x300")
+    # window_porque_usar.configure(bg = "#FFFFFF")
+
+
+# # Texto de instrução
+# canvas.create_text(
+#     51.0,
+#     64.0,
+#     anchor="nw",
+#     text="Esta ferramenta tem o propósito de \n"
+#     "facilitar a organização dos arquivos de \n"
+#     "imagem gerados para Timelapse pela \n"
+#     "câmera Intebras VIP.",
+#     fill="#000000",
+#     font=("Inter", 14 * -1)
+
+    # canvas_porque_usar = Canvas.create_text(
+    #     window_porque_usar,
+    #     bg = "#FFFFFF",
+    # )
+
 def qual_e_o_padrao():
     print("Botão 'Qual é o padrão' pressionado")
+
+def comando_secreto():
+    print("Combinação de teclas pressionada! Executando jpg_to_pptx()")
+    jpg_to_pptx.main()
+
 
 def executar_script():
     # print("Botão 'Executar script' pressionado")
     change_color_to_red()
+
+    # Confirma o início da execução
+    qtd_arquivos = sum(len(arquivos) for pasta_atual, subpastas, arquivos in os.walk(diretorio_inicial))
+
+    # qtd_arquivos = len(diretorio_inicial) # Quantidade de arquivos a serem processados
+    
+    # if confirma == "ESC":
+    if messagebox.askyesno("Confirmação", f"Há {qtd_arquivos} arquivos para processar. Deseja continuar?"):
+        # Se o usuário clicar em "Sim", continua a execução
+        pass
+    else:
+        # Se o usuário clicar em "Não", cancela a execução
+        print("Execução cancelada pelo usuário.")
+        change_color_to_yellow()
+        return
     organizador.renomear_arquivos(diretorio_inicial, diretorio_saida, atualizar_label_log)
     change_color_to_yellow()
+
+keyboard.add_hotkey("s+a+v", comando_secreto)
     
 window = Tk()
 
