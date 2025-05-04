@@ -4,7 +4,7 @@
 # The script renames the images with the date of the record and moves them to a new folder
 
 from pathlib import Path
-from tkinter import filedialog, messagebox
+from tkinter import filedialog, messagebox, Toplevel
 import textwrap
 import keyboard, os
 import organizador
@@ -143,27 +143,34 @@ def porque_usar():
     print("Botão 'Porque usar' pressionado")
 
     # window_porque_usar = Tk.Toplevel(window)
-    # window_porque_usar.title("Porque usar")
-    # window_porque_usar.geometry("400x300")
-    # window_porque_usar.configure(bg = "#FFFFFF")
+    window_porque_usar = Toplevel(window)
+    window_porque_usar.title("Porque usar")
+    window_porque_usar.geometry("400x300")
+    window_porque_usar.configure(bg="#FFFFFF")
 
+    # Texto de instrução
+    canvas_porque_usar = Canvas(
+        window_porque_usar,
+        bg="#FFFFFF",
+        height=300,
+        width=400,
+        bd=0,
+        highlightthickness=0,
+        relief="ridge"
+    )
+    canvas_porque_usar.place(x=0, y=0)
 
-# # Texto de instrução
-# canvas.create_text(
-#     51.0,
-#     64.0,
-#     anchor="nw",
-#     text="Esta ferramenta tem o propósito de \n"
-#     "facilitar a organização dos arquivos de \n"
-#     "imagem gerados para Timelapse pela \n"
-#     "câmera Intebras VIP.",
-#     fill="#000000",
-#     font=("Inter", 14 * -1)
-
-    # canvas_porque_usar = Canvas.create_text(
-    #     window_porque_usar,
-    #     bg = "#FFFFFF",
-    # )
+    canvas_porque_usar.create_text(
+        51.0,
+        64.0,
+        anchor="nw",
+        text="Esta ferramenta tem o propósito de \n"
+        "facilitar a organização dos arquivos de \n"
+        "imagem gerados para Timelapse pela \n"
+        "câmera Intebras VIP.",
+        fill="#000000",
+        font=("Inter", 14 * -1)
+    )
 
 def qual_e_o_padrao():
     print("Botão 'Qual é o padrão' pressionado")
