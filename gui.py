@@ -186,8 +186,6 @@ def executar_script():
 
     # Confirma o início da execução
     qtd_arquivos = sum(len(arquivos) for pasta_atual, subpastas, arquivos in os.walk(diretorio_inicial))
-
-    # qtd_arquivos = len(diretorio_inicial) # Quantidade de arquivos a serem processados
     
     # if confirma == "ESC":
     if messagebox.askyesno("Confirmação", f"Há {qtd_arquivos} arquivos para processar. Deseja continuar?"):
@@ -196,7 +194,8 @@ def executar_script():
     else:
         # Se o usuário clicar em "Não", cancela a execução
         print("Execução cancelada pelo usuário.")
-        change_color_to_yellow()
+        # change_color_to_yellow()
+        change_color_to_green()
         return
     organizador.renomear_arquivos(diretorio_inicial, diretorio_saida, atualizar_label_log)
     change_color_to_yellow()

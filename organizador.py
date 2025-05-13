@@ -25,7 +25,6 @@ def renomear_arquivos(diretorio_inicial, diretorio_saida, callback):
         for pasta_atual, subpastas, arquivos in os.walk(diretorio_inicial):
             # Itera sobre os arquivos da pasta atual e subpastas, adicionando o nome do diretório inicial ao nome do arquivo
             for arquivo in arquivos:
-                print("Quantidade de arquivos: ", len(arquivos))
                 caminho_arquivo = os.path.join(pasta_atual, arquivo)
                 if os.path.isfile(caminho_arquivo):
                     novo_nome = f"{data}_{arquivo.replace("[R][0@0][0]", "")}" # Adiciona a data ao nome do arquivo e remove o sufixo padrão [R][0@0][0]
