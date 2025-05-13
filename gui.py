@@ -24,6 +24,10 @@ text_diretorio_saida = "Nenhum diretório selecionado"
 status_color = "#FFFF00"  # Define a cor para amarelo
 status = "Selecione os diretórios"  # Define o status inicial
 
+# Variáveis globais para armazenar os últimos diretórios usados
+ultimo_diretorio_inicial = ""
+ultimo_diretorio_saida = ""
+
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
@@ -68,28 +72,27 @@ def atualizar_label_log(mensagem):
 
 # Funções correspondentes aos botões
 def selecionar_diretorio_inicial():
-    global diretorio_inicial
-    global status
-    global status_color
-    global text_diretorio_saida
+    global diretorio_inicial, status, status_color, text_diretorio_saida, ultimo_diretorio_inicial
     """Abre um seletor de diretório para escolher o diretório inicial."""
     root = Tk()
     root.withdraw()  # Esconde a janela principal do tkinter
     diretorio_inicial = filedialog.askdirectory(
-        title="Selecione o diretório inicial"
+        title="Selecione o diretório inicial",
+        initialdir=ultimo_diretorio_inicial or os.getcwd()  # Usa o último diretório ou o diretório atual
     )
     if not diretorio_inicial:  # Verifica se o usuário cancelou a seleção
         diretorio_inicial = ""
         text_diretorio_inicial = "Nenhum diretório selecionado"
-        texto_formatado = textwrap.fill(text_diretorio_inicial, width=60) # Formata o texto para quebrar a linha
+        texto_formatado = textwrap.fill(text_diretorio_inicial, width=60)  # Formata o texto para quebrar a linha
         canvas.itemconfig(label_diretorio_inicial, text=texto_formatado)
         status = "Selecione o diretório inicial"
         status_color = "#FFFF00"  # Define a cor para amarelo
         update_status_color()
         print("Seleção de diretório inicial cancelada")
     else:
+        ultimo_diretorio_inicial = diretorio_inicial  # Atualiza o último diretório usado
         text_diretorio_inicial = diretorio_inicial
-        texto_formatado = textwrap.fill(text_diretorio_inicial, 60) # Formata o texto para quebrar a linha
+        texto_formatado = textwrap.fill(text_diretorio_inicial, 60)  # Formata o texto para quebrar a linha
         canvas.itemconfig(label_diretorio_inicial, text=texto_formatado)
         status = "Diretório inicial selecionado"
         update_status_color()
@@ -104,28 +107,27 @@ def selecionar_diretorio_inicial():
         print(f"Diretório inicial: {diretorio_inicial}")
 
 def selecionar_diretorio_saida():
-    global diretorio_saida
-    global status
-    global status_color
-    global text_diretorio_inicial
+    global diretorio_saida, status, status_color, text_diretorio_inicial, ultimo_diretorio_saida
     """Abre um seletor de diretório para escolher o diretório de saída."""
     root = Tk()
     root.withdraw()  # Esconde a janela principal do tkinter
     diretorio_saida = filedialog.askdirectory(
-        title="Selecione o diretório de saída"
+        title="Selecione o diretório de saída",
+        initialdir=ultimo_diretorio_saida or os.getcwd()  # Usa o último diretório ou o diretório atual
     )
     if not diretorio_saida:  # Verifica se o usuário cancelou a seleção
         diretorio_saida = ""
         text_diretorio_saida = "Nenhum diretório selecionado"
-        texto_formatado = textwrap.fill(text_diretorio_saida, 60) # Formata o texto para quebrar a linha
+        texto_formatado = textwrap.fill(text_diretorio_saida, 60)  # Formata o texto para quebrar a linha
         canvas.itemconfig(label_diretorio_saida, text=texto_formatado)
         status = "Selecione o diretório de saída"
         status_color = "#FFFF00"  # Define a cor para amarelo
         update_status_color()
         print("Seleção de diretório de saída cancelada")
     else:
+        ultimo_diretorio_saida = diretorio_saida  # Atualiza o último diretório usado
         text_diretorio_saida = diretorio_saida
-        texto_formatado = textwrap.fill(text_diretorio_saida, 60) # Formata o texto para quebrar a linha
+        texto_formatado = textwrap.fill(text_diretorio_saida, 60)  # Formata o texto para quebrar a linha
         canvas.itemconfig(label_diretorio_saida, text=texto_formatado)
         status = "Diretório de saída selecionado"
         update_status_color()
