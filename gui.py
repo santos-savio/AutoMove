@@ -112,16 +112,16 @@ button_ajuda.place(
     height=30.0
 )
 
-button_image_4 = PhotoImage(
-    file=relative_to_assets("button_4.png"))
-button_4 = Button(
-    image=button_image_4,
+img_executar_script = PhotoImage(
+    file=relative_to_assets("img_executar_script.png"))
+button_executar = Button(
+    image=img_executar_script,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_4 clicked"),
     relief="flat"
 )
-button_4.place(
+button_executar.place(
     x=140.0,
     y=226.0,
     width=200.0,
