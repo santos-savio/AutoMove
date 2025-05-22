@@ -96,16 +96,16 @@ canvas.create_text(
     font=("Inter", 10 * -1)
 )
 
-button_image_3 = PhotoImage(
-    file=relative_to_assets("button_3.png"))
-button_3 = Button(
-    image=button_image_3,
+img_help = PhotoImage(
+    file=relative_to_assets("img_help.png"))
+button_ajuda = Button(
+    image=img_help,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_3 clicked"),
+    command=lambda: print("Ajuda"),
     relief="flat"
 )
-button_3.place(
+button_ajuda.place(
     x=435.0,
     y=15.0,
     width=30.0,
