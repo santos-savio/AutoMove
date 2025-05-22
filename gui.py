@@ -3,8 +3,9 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\santos.savio\Documents offline\AutoMove\Interface sucinta\build\assets\frame3")
+ASSETS_PATH = OUTPUT_PATH / "assets" / "frame3"
 
+print(ASSETS_PATH)
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
@@ -130,7 +131,7 @@ canvas.create_text(
     250.0,
     96.0,
     anchor="n",
-    text="Nenhum diretório selecionado - teste texto grandão, maior que o espaço. É grande mesmo, não é mentira.",
+    text="Nenhum diretório selecionado",
     fill="#818181",
     font=("Inter", 12 * -1),
     width=475.0,
@@ -146,4 +147,4 @@ canvas.create_text(
     width=475.0
 )
 window.resizable(False, False)
-window.mainloop()
+# window.mainloop()
