@@ -55,10 +55,10 @@ canvas.create_text(
     font=("Inter", 12 * -1)
 )
 
-button_selecionar_pasta_origem = PhotoImage(
-    file=relative_to_assets("button_selecionar_pasta_origem.png"))
+img_selecionar_pasta_origem = PhotoImage(
+    file=relative_to_assets("img_selecionar_pasta_origem.png"))
 button_selecionar_pasta_origem = Button(
-    image=button_selecionar_pasta_origem,
+    image=img_selecionar_pasta_origem,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("Selecionar pasta de origem"),
@@ -71,16 +71,16 @@ button_selecionar_pasta_origem.place(
     height=26.0
 )
 
-button_image_2 = PhotoImage(
-    file=relative_to_assets("button_2.png"))
-button_2 = Button(
-    image=button_image_2,
+img_selecionar_pasta_destino = PhotoImage(
+    file=relative_to_assets("img_selecionar_pasta_destino.png"))
+button_selecionar_pasta_destino = Button(
+    image=img_selecionar_pasta_destino,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_2 clicked"),
+    command=lambda: print("Escolher pasta de destino"),
     relief="flat"
 )
-button_2.place(
+button_selecionar_pasta_destino.place(
     x=148.0,
     y=138.0,
     width=184.0,
