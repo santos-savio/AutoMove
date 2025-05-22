@@ -147,4 +147,4 @@ canvas.create_text(
     width=475.0
 )
 window.resizable(False, False)
-# window.mainloop()
+window.mainloop()
