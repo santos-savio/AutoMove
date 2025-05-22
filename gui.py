@@ -38,12 +38,12 @@ canvas.create_text(
     font=("Inter", 12 * -1)
 )
 
-canvas.create_rectangle(
+canvas.create_oval(
     10.0,
     378.0,
     22.0,
     390.0,
-    fill="#000000",
+    fill="#FF0000",
     outline="")
 
 canvas.create_text(
@@ -118,7 +118,7 @@ button_executar = Button(
     image=img_executar_script,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_4 clicked"),
+    command=lambda: print("executar script"),
     relief="flat"
 )
 button_executar.place(
