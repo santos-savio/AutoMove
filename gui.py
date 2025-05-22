@@ -1,8 +1,6 @@
 from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 
-# Teste integração Smart Commit Jira
-
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / "assets" / "frame3"
 
@@ -55,13 +53,13 @@ canvas.create_text(
     font=("Inter", 12 * -1)
 )
 
-button_image_1 = PhotoImage(
-    file=relative_to_assets("button_1.png"))
+button_pasta_origem = PhotoImage(
+    file=relative_to_assets("button_pasta_origem.png"))
 button_1 = Button(
-    image=button_image_1,
+    image=button_pasta_origem,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
+    command=lambda: print("Escolher pasta de origem"),
     relief="flat"
 )
 button_1.place(
