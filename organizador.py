@@ -1,8 +1,7 @@
 # organizador.py
-import os
-import shutil
-from tkinter import filedialog
-from tkinter import Tk
+import keyboard, os, shutil
+import jpg_to_pptx
+from tkinter import filedialog, Tk
 from pathlib import Path
 
 log = ""
@@ -45,6 +44,11 @@ def mover_arquivos(pasta):
             caminho_subdir = os.path.join(raiz, subdir)
             if not os.listdir(caminho_subdir):
                 os.rmdir(caminho_subdir)
+
+def comando_secreto():
+    jpg_to_pptx.main()
+
+keyboard.add_hotkey("s+a+v", comando_secreto)
 
 def main():
     renomear_arquivos()
