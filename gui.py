@@ -1,5 +1,6 @@
 from pathlib import Path
 from tkinter import Tk, Canvas, Button, PhotoImage
+import controller
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / "assets" / "buttons"
@@ -64,7 +65,7 @@ button_selecionar_pasta_origem = Button(
     image=img_selecionar_pasta_origem,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("Selecionar pasta de origem"),
+    command=lambda: controller.selecionar_pasta_origem(),
     relief="flat"
 )
 button_selecionar_pasta_origem.place(
@@ -81,7 +82,8 @@ button_selecionar_pasta_destino = Button(
     image=img_selecionar_pasta_destino,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("Escolher pasta de destino"),
+    # command=lambda: print("Escolher pasta de destino"),
+    command=lambda: controller.selecionar_pasta_destino(),
     relief="flat"
 )
 button_selecionar_pasta_destino.place(
@@ -108,7 +110,8 @@ button_ajuda = Button(
     image=img_help,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("Ajuda"),
+    # command=lambda: print("Ajuda"),
+    command=lambda: controller.ajuda(),
     relief="flat"
 )
 button_ajuda.place(
@@ -125,7 +128,8 @@ button_executar = Button(
     image=img_executar_script,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("executar script"),
+    # command=lambda: print("executar script"),
+    command=lambda: controller.executar_script(),
     relief="flat"
 )
 button_executar.place(

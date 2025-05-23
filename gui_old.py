@@ -73,7 +73,7 @@ def atualizar_label_log(mensagem):
 # Funções correspondentes aos botões
 def selecionar_diretorio_inicial():
     global diretorio_inicial, status, status_color, text_diretorio_saida, ultimo_diretorio_inicial
-    """Abre um seletor de diretório para escolher o diretório inicial."""
+    # Abre um seletor de diretório para escolher o diretório inicial.
     root = Tk()
     root.withdraw()  # Esconde a janela principal do tkinter
     diretorio_inicial = filedialog.askdirectory(
@@ -108,7 +108,7 @@ def selecionar_diretorio_inicial():
 
 def selecionar_diretorio_saida():
     global diretorio_saida, status, status_color, text_diretorio_inicial, ultimo_diretorio_saida
-    """Abre um seletor de diretório para escolher o diretório de saída."""
+    # Abre um seletor de diretório para escolher o diretório de saída."""
     root = Tk()
     root.withdraw()  # Esconde a janela principal do tkinter
     diretorio_saida = filedialog.askdirectory(
