@@ -1,6 +1,6 @@
 from pathlib import Path
 from tkinter import Tk, Canvas, Button, PhotoImage
-import controller, atualizar_status
+import controller
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / "assets/buttons"
