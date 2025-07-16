@@ -10,7 +10,6 @@ jobs:
       - name: Checkout do Código
         uses: actions/checkout@v2
 
-    steps:
       - name: Ola, Mundo!
         run: echo "Ola, Mundo!"
 
